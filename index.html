@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Language detector benchmark · 18 models</title>
+  <meta name="description" content="A local comparison of 18 language detectors: accuracy, CPU latency and process memory for Uzbek Cyrillic, Uzbek Latin, Russian Cyrillic and English.">
+  <style>
+    :root{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#18212b;background:#fff;font-synthesis:none}
+    *{box-sizing:border-box}body{margin:0;font-size:1rem;line-height:1.55}main{max-width:980px;margin:auto;padding:44px 24px 48px}
+    .meta{font-size:.8125rem;color:#526171;margin:0 0 10px;letter-spacing:.035em}h1{font-size:clamp(1.65rem,5vw,2.25rem);line-height:1.15;letter-spacing:-.035em;margin:0 0 14px;font-weight:650}
+    p{margin:0 0 14px;max-width:820px}.scope,.note{color:#526171}.scope{margin-bottom:22px}.lead{border-left:3px solid #1c5bba;padding-left:14px;margin-bottom:22px}
+    a{color:#1859ad;text-decoration:none;text-underline-offset:3px}a:hover{text-decoration:underline}a:focus-visible,summary:focus-visible,.table-wrap:focus-visible{outline:3px solid #1c5bba;outline-offset:3px}
+    .table-wrap{overflow-x:auto;margin-bottom:12px}table{width:100%;border-collapse:collapse;font-size:.875rem;min-width:600px;font-variant-numeric:tabular-nums}
+    caption{text-align:left;font-size:1rem;font-weight:600;margin:0 0 10px}th,td{padding:11px 12px;border-bottom:1px solid #e2e7ed;text-align:right;vertical-align:middle}
+    thead th{font-weight:500;color:#526171;font-size:.8125rem;white-space:nowrap;background:#f5f7fa}th:first-child{text-align:left}tbody th{font-weight:550;width:38%}td{white-space:nowrap}
+    .setting,.count{display:block;font-weight:400;font-size:.8125rem;line-height:1.5;color:#526171}.count{font-size:.75rem}.leader{background:#eff5ff}.leader th a{font-weight:650}strong{font-weight:650}
+    .note{font-size:.875rem;margin-bottom:22px}details{border-top:1px solid #e2e7ed;padding:15px 0}summary{cursor:pointer;font-weight:550;font-size:.9375rem}details .content{padding-top:16px}details p{font-size:.875rem;color:#526171}details p:last-child{margin-bottom:0}
+    footer{border-top:1px solid #e2e7ed;margin-top:6px;padding-top:16px;color:#526171;font-size:.8125rem}
+    @media(max-width:600px){main{padding:28px 16px 32px}th,td{padding:10px}.table-wrap{margin-right:-16px;padding-right:16px}.scope{font-size:.9375rem}}
+    @media print{main{padding:0;max-width:none}.table-wrap{overflow:visible}a{color:inherit}thead{display:table-header-group}tr{break-inside:avoid}details{break-inside:avoid}}
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="meta">LOCAL BENCHMARK · 10 SEPTEMBER 2026</p>
+    <h1>Language detector benchmark</h1>
+    <p class="scope">18 models · 280 synthetic texts · Uzbek Cyrillic, Uzbek Latin, Russian Cyrillic and English. Each writing form has 70 examples; Russian Latin is excluded.</p>
+  </header>
+  <p class="lead"><strong>CLD2 best effort led this test:</strong> 278/280 correct, 0.003 ms per text and 29 MB of process RAM. It was the most accurate and least demanding model measured.</p>
+  <div class="table-wrap" role="region" aria-label="All 18 models, ordered by best observed accuracy" tabindex="0">
+    <table>
+      <caption>Accuracy and CPU cost</caption>
+      <thead><tr><th scope="col">Model / selected setting</th><th scope="col">Raw</th><th scope="col">Best observed</th><th scope="col">CPU / text<br>(ms, median)</th><th scope="col">RAM<br>(MB)</th></tr></thead>
+      <tbody><tr class="leader" data-model="CLD2">
+      <th scope="row"><a href="https://github.com/aboSamoor/pycld2">CLD2</a><span class="setting">Best effort</span></th>
+      <td>96.1%</td>
+      <td><strong>99.3%</strong><span class="count">278/280</span></td>
+      <td>0.003</td><td>29</td></tr>
+<tr data-model="GlotLID">
+      <th scope="row"><a href="https://huggingface.co/cis-lmu/glotlid/tree/85cd6716494360367b75f642b5bc78667605d0b4">GlotLID</a><span class="setting">Cleanup + lowercase</span></th>
+      <td>95.7%</td>
+      <td><strong>97.9%</strong><span class="count">274/280</span></td>
+      <td>0.260</td><td>1,911</td></tr>
+<tr data-model="Uzbek XLM-R">
+      <th scope="row"><a href="https://huggingface.co/rifkat/uz_kr_lang-detection/tree/9de42d6cb32bb065149f11736717e6acf2554ae0">Uzbek XLM-R</a><span class="setting">Raw</span></th>
+      <td>97.5%</td>
+      <td><strong>97.5%</strong><span class="count">273/280</span></td>
+      <td>20.253</td><td>1,190</td></tr>
+<tr data-model="mT0 LID">
+      <th scope="row"><a href="https://huggingface.co/whitefoxredhell/language_identification/tree/b6e2a515158542c0d84e96b46e86cb0b8d01e01b">mT0 LID</a><span class="setting">Raw</span></th>
+      <td>95.4%</td>
+      <td><strong>95.4%</strong><span class="count">267/280</span></td>
+      <td>5.602</td><td>812</td></tr>
+<tr data-model="NbAiLab 159 quantized">
+      <th scope="row"><a href="https://huggingface.co/NbAiLab/nb-nordic-lid/tree/12401f3e0d4e73adf86a089e828d82d37242ccab">NbAiLab 159 quantized</a><span class="setting">Cleanup + lowercase</span></th>
+      <td>90.4%</td>
+      <td><strong>95.0%</strong><span class="count">266/280</span></td>
+      <td>0.092</td><td>54</td></tr>
+<tr data-model="Spellman reference">
+      <th scope="row"><a href="https://huggingface.co/vpermilp/spellman/tree/22f386e29b7e14eb01befd29b066f284eea5518d">Spellman reference</a><span class="setting">Raw · Python reference</span></th>
+      <td>76.1%</td>
+      <td><strong>76.1%</strong><span class="count">213/280</span></td>
+      <td>0.353</td><td>114</td></tr>
+<tr data-model="OpenLID-v3">
+      <th scope="row"><a href="https://huggingface.co/HPLT/OpenLID-v3/tree/6b9560483e17e42f48d86cebf22b4b58dffeaa70">OpenLID-v3</a><span class="setting">Author preprocessing</span></th>
+      <td>66.4%</td>
+      <td><strong>73.6%</strong><span class="count">206/280</span></td>
+      <td>0.052</td><td>1,330</td></tr>
+<tr data-model="Meta lid218e">
+      <th scope="row"><a href="https://huggingface.co/facebook/fasttext-language-identification/tree/3af127d4124fc58b75666f3594bb5143b9757e78">Meta lid218e</a><span class="setting">Cleanup + lowercase</span></th>
+      <td>68.6%</td>
+      <td><strong>73.6%</strong><span class="count">206/280</span></td>
+      <td>0.056</td><td>1,260</td></tr>
+<tr data-model="Polyglot Multilabel">
+      <th scope="row"><a href="https://huggingface.co/polyglot-tagger/multilabel-language-identification/tree/163392aa1aaa890138b8575fe4e8d5b17159b485">Polyglot Multilabel</a><span class="setting">Cleanup + lowercase</span></th>
+      <td>73.2%</td>
+      <td><strong>73.6%</strong><span class="count">206/280</span></td>
+      <td>21.080</td><td>1,185</td></tr>
+<tr data-model="Polyglot Tagger">
+      <th scope="row"><a href="https://huggingface.co/polyglot-tagger/language-identification/tree/545415c5f7629213e9c7aaec2674614c022e3e5e">Polyglot Tagger</a><span class="setting">Cleanup</span></th>
+      <td>73.2%</td>
+      <td><strong>73.6%</strong><span class="count">206/280</span></td>
+      <td>21.767</td><td>1,192</td></tr>
+<tr data-model="MediaPipe">
+      <th scope="row"><a href="https://developers.google.com/edge/mediapipe/solutions/text/language_detector">MediaPipe</a><span class="setting">Raw</span></th>
+      <td>73.2%</td>
+      <td><strong>73.2%</strong><span class="count">205/280</span></td>
+      <td>0.074</td><td>130</td></tr>
+<tr data-model="lid.176">
+      <th scope="row"><a href="https://fasttext.cc/docs/en/language-identification.html">lid.176</a><span class="setting">Cleanup + lowercase</span></th>
+      <td>70.0%</td>
+      <td><strong>72.9%</strong><span class="count">204/280</span></td>
+      <td>0.015</td><td>183</td></tr>
+<tr data-model="XLM-V">
+      <th scope="row"><a href="https://huggingface.co/juliensimon/xlm-v-base-language-id/tree/43f6bb2b173010e0b982bdd98cff549c754909cf">XLM-V</a><span class="setting">Cleanup + lowercase</span></th>
+      <td>71.4%</td>
+      <td><strong>72.9%</strong><span class="count">204/280</span></td>
+      <td>20.328</td><td>2,219</td></tr>
+<tr data-model="LIDiRL LSTM">
+      <th scope="row"><a href="https://huggingface.co/rewicks/lidirl-lstm-aug/tree/71b8587bf956c06fb6c8f4e6a6a77376c148dbf1">LIDiRL LSTM</a><span class="setting">Cleanup + lowercase</span></th>
+      <td>70.4%</td>
+      <td><strong>71.8%</strong><span class="count">201/280</span></td>
+      <td>2.465</td><td>329</td></tr>
+<tr data-model="Franc">
+      <th scope="row"><a href="https://github.com/wooorm/franc">Franc</a><span class="setting">Cleanup</span></th>
+      <td>70.4%</td>
+      <td><strong>70.7%</strong><span class="count">198/280</span></td>
+      <td>0.071</td><td>83</td></tr>
+<tr data-model="LIDiRL CNN">
+      <th scope="row"><a href="https://huggingface.co/rewicks/lidirl-cnn-aug/tree/837cd798703a8d4b534af7ad6c6a9c0015d32961">LIDiRL CNN</a><span class="setting">Raw</span></th>
+      <td>69.6%</td>
+      <td><strong>69.6%</strong><span class="count">195/280</span></td>
+      <td>0.505</td><td>329</td></tr>
+<tr data-model="CLD3">
+      <th scope="row"><a href="https://github.com/kwonoj/cld3-asm">CLD3</a><span class="setting">Raw · WebAssembly</span></th>
+      <td>68.9%</td>
+      <td><strong>68.9%</strong><span class="count">193/280</span></td>
+      <td>0.056</td><td>83</td></tr>
+<tr data-model="CommonLingua">
+      <th scope="row"><a href="https://huggingface.co/PleIAs/CommonLingua/tree/43fe88d75e94b11283b66daccbbe4a73e7bc1361">CommonLingua</a><span class="setting">Cleanup + lowercase</span></th>
+      <td>52.1%</td>
+      <td><strong>56.8%</strong><span class="count">159/280</span></td>
+      <td>8.321</td><td>248</td></tr></tbody>
+    </table>
+  </div>
+  <p class="note">CPU time and RAM use the selected setting. “Best observed” selects each model’s strongest tested setting on this same set. These are challenge-set results, not estimates of production accuracy.</p>
+  <details>
+    <summary>Results for each writing form</summary>
+    <div class="content table-wrap" role="region" aria-label="Correct predictions by writing form" tabindex="0">
+      <table><caption>Correct predictions with the selected setting</caption>
+        <thead><tr><th scope="col">Model</th><th scope="col">Uzbek<br>Cyrillic</th><th scope="col">Uzbek<br>Latin</th><th scope="col">Russian<br>Cyrillic</th><th scope="col">English</th></tr></thead>
+        <tbody><tr><th scope="row">CLD2</th><td>69/70</td><td>70/70</td><td>69/70</td><td>70/70</td></tr>
+<tr><th scope="row">GlotLID</th><td>65/70</td><td>70/70</td><td>70/70</td><td>69/70</td></tr>
+<tr><th scope="row">Uzbek XLM-R</th><td>70/70</td><td>69/70</td><td>67/70</td><td>67/70</td></tr>
+<tr><th scope="row">mT0 LID</th><td>70/70</td><td>59/70</td><td>70/70</td><td>68/70</td></tr>
+<tr><th scope="row">NbAiLab 159 quantized</th><td>64/70</td><td>68/70</td><td>67/70</td><td>67/70</td></tr>
+<tr><th scope="row">Spellman reference</th><td>70/70</td><td>4/70</td><td>69/70</td><td>70/70</td></tr>
+<tr><th scope="row">OpenLID-v3</th><td>0/70</td><td>70/70</td><td>70/70</td><td>66/70</td></tr>
+<tr><th scope="row">Meta lid218e</th><td>0/70</td><td>69/70</td><td>68/70</td><td>69/70</td></tr>
+<tr><th scope="row">Polyglot Multilabel</th><td>0/70</td><td>70/70</td><td>68/70</td><td>68/70</td></tr>
+<tr><th scope="row">Polyglot Tagger</th><td>0/70</td><td>69/70</td><td>68/70</td><td>69/70</td></tr>
+<tr><th scope="row">MediaPipe</th><td>0/70</td><td>67/70</td><td>68/70</td><td>70/70</td></tr>
+<tr><th scope="row">lid.176</th><td>9/70</td><td>56/70</td><td>70/70</td><td>69/70</td></tr>
+<tr><th scope="row">XLM-V</th><td>0/70</td><td>68/70</td><td>68/70</td><td>68/70</td></tr>
+<tr><th scope="row">LIDiRL LSTM</th><td>0/70</td><td>67/70</td><td>64/70</td><td>70/70</td></tr>
+<tr><th scope="row">Franc</th><td>64/70</td><td>61/70</td><td>32/70</td><td>41/70</td></tr>
+<tr><th scope="row">LIDiRL CNN</th><td>0/70</td><td>67/70</td><td>65/70</td><td>63/70</td></tr>
+<tr><th scope="row">CLD3</th><td>0/70</td><td>65/70</td><td>64/70</td><td>64/70</td></tr>
+<tr><th scope="row">CommonLingua</th><td>2/70</td><td>47/70</td><td>58/70</td><td>52/70</td></tr></tbody>
+      </table>
+    </div>
+  </details>
+  <details>
+    <summary>Method and limits</summary>
+    <div class="content">
+      <p><strong>Accuracy.</strong> Unrestricted top-1 language recognition, with Uzbek’s two scripts reported separately. Standard, informal, noisy and short texts share related sentences. Labels were authored for the benchmark and have not had independent native-speaker review. The corpus was reused as candidates were added. No model was trained or fine-tuned for this test. The 27 mixed or ambiguous diagnostic inputs are excluded from scores.</p>
+      <p><strong>CPU and memory.</strong> Apple M3, 16 GiB RAM; CPU only. Each model ran in a fresh process, warmed on all 280 texts, then measured for 20 passes (3 for PyTorch models). PyTorch and BLAS used one thread; native engines used their defaults. Median latency includes preprocessing, tokenization and top-1 output, and excludes model loading. RAM is the warmed process’s resident memory in decimal MB, including its runtime; it is not a minimum server requirement or a power measurement. Runtime differences and a single machine limit generalization.</p>
+      <p><strong>Settings.</strong> Cleanup normalizes Unicode, apostrophes and whitespace, removes URLs, handles, hashtags and invisible formatting controls, and does no transliteration. OpenLID uses its author’s preprocessing. CLD2 uses bestEffort=True, which favors guesses; unsupported-language rejection was not evaluated. NbAiLab uses the quantized 159-language .ftz model. Spellman uses a Python/NumPy reference; its numbers do not represent native Rust speed. CLD3 uses cld3-asm 4.0.0; Franc uses 6.2.0; MediaPipe uses 1.0.1 with the float32 v1 detector. Transformer runs use float32; Polyglot Tagger pools token scores by language.</p>
+      <p><strong>Verification.</strong> All 18 models were measured on the CPU, and their 5,040 warmup top-1 predictions matched the previously saved selected configurations. Model names link to their sources; model checkpoints are pinned where available.</p>
+    </div>
+  </details>
+  <footer>Measured locally on 10 September 2026. Lower latency and RAM are better; higher accuracy is better.</footer>
+</main>
+</body>
+</html>
