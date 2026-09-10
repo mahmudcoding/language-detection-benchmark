@@ -32,8 +32,8 @@
   <p class="lead"><strong>CLD2 best effort led this test:</strong> 278/280 correct, 0.003 ms per text and 29 MB of process RAM. It was the most accurate and least demanding model measured.</p>
   <div class="table-wrap" role="region" aria-label="All 18 models, ordered by best observed accuracy" tabindex="0">
     <table>
-      <caption>Accuracy and CPU cost</caption>
-      <thead><tr><th scope="col">Model / selected setting</th><th scope="col">Best observed</th><th scope="col">CPU / text<br>(ms, median)</th><th scope="col">RAM<br>(MB)</th></tr></thead>
+      <caption>Accuracy, speed and memory</caption>
+      <thead><tr><th scope="col">Model</th><th scope="col">Accuracy</th><th scope="col">Time per message<br>(milliseconds)</th><th scope="col">Memory used<br>(megabytes)</th></tr></thead>
       <tbody><tr class="leader" data-model="CLD2">
       <th scope="row"><a href="https://github.com/aboSamoor/pycld2">CLD2</a><span class="setting">Best effort</span></th>
       <td><strong>99.3%</strong><span class="count">278/280</span></td>
@@ -108,7 +108,7 @@
       <td>8.321</td><td>248</td></tr></tbody>
     </table>
   </div>
-  <p class="note">CPU time and RAM use the selected setting. “Best observed” selects each model’s strongest tested setting on this same set. These are challenge-set results, not estimates of production accuracy.</p>
+  <p class="note">Less time means faster detection; less memory means a lighter model. 1,000 milliseconds = 1 second. Each row shows the model’s best tested setting on these sample texts; the results do not predict real-world accuracy.</p>
   <details>
     <summary>Results for each writing form</summary>
     <div class="content table-wrap" role="region" aria-label="Correct predictions by writing form" tabindex="0">
@@ -144,7 +144,7 @@
       <p><strong>Verification.</strong> All 18 models were measured on the CPU, and their 5,040 warmup top-1 predictions matched the previously saved selected configurations. Model names link to their sources; model checkpoints are pinned where available.</p>
     </div>
   </details>
-  <footer>Measured locally on 10 September 2026. Lower latency and RAM are better; higher accuracy is better.</footer>
+  <footer>Measured locally on 10 September 2026. Less time and memory are better; higher accuracy is better.</footer>
 </main>
 </body>
 </html>
